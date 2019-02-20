@@ -4,6 +4,7 @@
   "description": "An app for finding great food trucks in SF",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "yarn test"
   },
   "repository": {
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/synapticsynergy/foodTrucksSF/issues"
   },
-  "homepage": "https://github.com/synapticsynergy/foodTrucksSF#readme"
+  "homepage": "https://github.com/synapticsynergy/foodTrucksSF#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
