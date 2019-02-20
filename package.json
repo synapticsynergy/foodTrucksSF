@@ -1,0 +1,19 @@
+{
+  "name": "foodtruckssf",
+  "version": "1.0.0",
+  "description": "An app for finding great food trucks in SF",
+  "main": "index.js",
+  "scripts": {
+    "test": "yarn test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/synapticsynergy/foodTrucksSF.git"
+  },
+  "author": "Blake Danson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/synapticsynergy/foodTrucksSF/issues"
+  },
+  "homepage": "https://github.com/synapticsynergy/foodTrucksSF#readme"
+}
