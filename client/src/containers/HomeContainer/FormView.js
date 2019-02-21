@@ -18,13 +18,13 @@ class FormView extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({ 'food':event.target.value });
+    this.setState({ food: event.target.value });
   }
 
   render() {
     return (
       <div>
-        <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '80vh'}}>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
           <h2>Great Food is Waiting</h2>
           <form
             className="formContainer"
@@ -37,11 +37,11 @@ class FormView extends React.Component {
               className="textField"
               value={this.state.food}
               onChange={this.handleChange}
-              margin="normal"
+              // margin="normal"
               variant="filled"
             />
             <br />
-            <Button style={{ marginTop: '10px' }} variant="contained" color="primary">
+            <Button style={{ marginTop: '20px' }} variant="contained" color="primary">
               Submit
           </Button>
           </form>
