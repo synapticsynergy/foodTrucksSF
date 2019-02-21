@@ -13,7 +13,7 @@ export default function App() {
         position="static"
       >
         <Typography 
-        style={{margin: '10px'}} 
+        style={{margin: '10px 0'}} 
         variant="h6" 
         color="inherit"
         >
