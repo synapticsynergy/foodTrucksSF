@@ -1,5 +1,9 @@
 import React from 'react';
 import axios from 'axios';
+import {
+
+} from '@material-ui/core';
+import ListItem from './ListItem';
 
 class ListView extends React.Component {
   constructor(props) {
@@ -20,9 +24,10 @@ class ListView extends React.Component {
   render() {
     const truckList = this.state.truckList.map((truck) => {
       return (
-        <div>
-          <p>{truck.applicant}</p>
-        </div>
+        // <div>
+        //   <p>{truck.applicant}</p>
+        // </div>
+        <ListItem truck={truck} />
       );
     });
     return (

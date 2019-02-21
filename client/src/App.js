@@ -12,12 +12,12 @@ export default function App() {
       <AppBar
         position="static"
       >
-        <Typography 
-        style={{margin: '10px 0'}} 
-        variant="h6" 
-        color="inherit"
+        <Typography
+          style={{ margin: '10px 0' }}
+          variant="h6"
+          color="inherit"
         >
-          SF Food Trucks
+          Just Truck It.
         </Typography>
       </AppBar>
       {/* <header className="App-header">
