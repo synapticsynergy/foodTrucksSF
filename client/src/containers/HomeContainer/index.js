@@ -7,8 +7,8 @@ class HomeContainer extends React.Component {
     super(props);
     this.state = {
       listView: 1,
-      formView: true,
-      // formView: false,
+      // formView: true,
+      formView: false,
     };
   }
 

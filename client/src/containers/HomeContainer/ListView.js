@@ -14,22 +14,25 @@ class ListView extends React.Component {
   }
 
   componentWillMount() {
-    axios.get('https://data.sfgov.org/resource/6a9r-agq8.json').then((resp) => {
-      this.setState({ truckList: resp.data });
+    // axios.get('https://data.sfgov.org/resource/6a9r-agq8.json').then((resp) => {
+    axios.get('https://v0nnu8eif4.execute-api.us-west-2.amazonaws.com/dev/sfFoodTrucks').then((resp) => {
+      console.log(resp.data.message,' was data defined?');
+      this.setState({ truckList: resp.data.message });
     }).catch((err) => {
       console.error(err, ' Failed to fetch resource');
     });
   }
 
   render() {
-    const truckList = this.state.truckList.map((truck) => {
+    const truckList = this.state.truckList.length > 0 ? this.state.truckList.map((truck) => {
       return (
         // <div>
         //   <p>{truck.applicant}</p>
         // </div>
         <ListItem truck={truck} />
       );
-    });
+    }) : null;
+
     return (
       <div>
         {truckList}
