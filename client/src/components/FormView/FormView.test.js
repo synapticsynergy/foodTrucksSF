@@ -2,7 +2,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
-import FormView from './FormView';
+import FormView from '.';
 
 describe('FormView', () => {
   const wrapper = shallow(<FormView />);

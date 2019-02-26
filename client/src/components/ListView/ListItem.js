@@ -42,15 +42,20 @@ const styles = theme => ({
   },
 });
 
-class RecipeReviewCard extends React.Component {
-  state = { expanded: false };
+class ListItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      expanded: false,
+    }
+    this.handleExpandClick = this.handleExpandClick.bind(this);
+  }
 
-  handleExpandClick = () => {
+  handleExpandClick() {
     this.setState(state => ({ expanded: !state.expanded }));
-  };
+  }
 
   render() {
-    console.log(this.props.truck);
     const { applicant, fooditems, dayshours } = this.props.truck;
 
     return (
@@ -122,4 +127,4 @@ class RecipeReviewCard extends React.Component {
 //   classes: PropTypes.object.isRequired,
 // };
 
-export default withStyles(styles)(RecipeReviewCard);
+export default withStyles(styles)(ListItem);

@@ -2,7 +2,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
-import ListView from './ListView';
+import ListView from '.';
 
 describe('ListView', () => {
   const wrapper = shallow(<ListView />);
