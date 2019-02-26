@@ -1,22 +1,10 @@
 import React from 'react';
-import ListView from './ListView';
+import FormView from '../../components/FormView';
 
-class HomeContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      listView: 1,
-    };
-  }
-
-  render() {
-    // const mapOrListView = this.state.listView ? <ListView /> : <MapView />;
-    return (
-      <div className="homeContainer">
-        <ListView />
-      </div>
-    );
-  }
+export default function HomeContainer(props) {
+  return (
+    <div className="homeContainer">
+      <FormView {...props} />
+    </div>
+  );
 }
-
-export default HomeContainer;
