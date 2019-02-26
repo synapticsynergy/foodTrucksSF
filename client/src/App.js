@@ -13,10 +13,15 @@ class App extends React.Component {
       listView: false,
     };
     this.toggleListView = this.toggleListView.bind(this);
+    this.backToFormView = this.backToFormView.bind(this);
   }
 
   toggleListView() {
     this.setState({ listView: !this.state.listView });
+  }
+
+  backToFormView() {
+    this.setState({ listView: false });
   }
 
   render() {
@@ -29,7 +34,7 @@ class App extends React.Component {
             style={{ margin: '10px 0' }}
             variant="h6"
             color="inherit"
-            onClick={this.toggleListView}
+            onClick={this.backToFormView}
           >
             Just Truck It.
           </Typography>
