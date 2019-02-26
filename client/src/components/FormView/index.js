@@ -17,7 +17,6 @@ class FormView extends React.Component {
       latitude: '',
       longitude: '',
       food: '',
-      // listView: false,
       isFetching: false,
     };
 
@@ -25,7 +24,6 @@ class FormView extends React.Component {
     this.useCurrentLocation = this.useCurrentLocation.bind(this);
     this.updateCurrentLocation = this.updateCurrentLocation.bind(this);
     this.changeCategory = this.changeCategory.bind(this);
-    // this.changeListView = this.changeListView.bind(this);
     this.handleEnter = this.handleEnter.bind(this);
   }
 
@@ -59,12 +57,7 @@ class FormView extends React.Component {
     this.setState({ food: event.target.value });
   }
 
-  // changeListView() {
-  //   this.setState({ listView: !this.state.listView });
-  // }
-
   handleEnter(e) {
-    console.log(' can I see listView here?', this.props);
     //This is the keyCode for the enter key
     if (e.keyCode === 13) {
       this.props.toggleListView();
@@ -113,9 +106,9 @@ class FormView extends React.Component {
                 onChange={this.changeLocation}
                 onKeyDown={this.handleEnter}
                 variant="filled"
-              />              
+              />
             </div>
-              <p style={{fontSize: 12, color: 'grey'}}>Example: 278 Post St, San Francisco, CA 94108</p>
+              <p style={{ fontSize: 12, color: 'grey' }}>Example: 278 Post St, San Francisco, CA 94108</p>
               <br />
               {submitButton}
             </form>
