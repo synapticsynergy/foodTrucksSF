@@ -1,11 +1,12 @@
 import React from 'react';
-import { 
+import {
   TextField,
   Typography,
   Button,
   FormHelperText,
   LinearProgress,
 } from '@material-ui/core';
+import LocationIcon from '@material-ui/icons/LocationSearching';
 import ListView from '../ListView';
 
 class FormView extends React.Component {
@@ -16,7 +17,7 @@ class FormView extends React.Component {
       latitude: '',
       longitude: '',
       food: '',
-      listView: false,
+      // listView: false,
       isFetching: false,
     };
 
@@ -24,7 +25,8 @@ class FormView extends React.Component {
     this.useCurrentLocation = this.useCurrentLocation.bind(this);
     this.updateCurrentLocation = this.updateCurrentLocation.bind(this);
     this.changeCategory = this.changeCategory.bind(this);
-    this.changeListView = this.changeListView.bind(this);
+    // this.changeListView = this.changeListView.bind(this);
+    this.handleEnter = this.handleEnter.bind(this);
   }
 
   changeLocation(event) {
@@ -57,8 +59,16 @@ class FormView extends React.Component {
     this.setState({ food: event.target.value });
   }
 
-  changeListView() {
-    this.setState({ listView: !this.state.listView });
+  // changeListView() {
+  //   this.setState({ listView: !this.state.listView });
+  // }
+
+  handleEnter(e) {
+    console.log(' can I see listView here?', this.props);
+    //This is the keyCode for the enter key
+    if (e.keyCode === 13) {
+      this.props.toggleListView();
+    }
   }
 
   render() {
@@ -66,20 +76,20 @@ class FormView extends React.Component {
     let formOrListView;
     if(this.state.location) {
       submitButton = (
-        <Button onClick={this.changeListView} style={{ marginTop: '20px' }} variant="contained" color="primary">
+        <Button onClick={this.props.toggleListView} variant="contained" color="primary">
           Submit
         </Button>
       );
     } else {
       submitButton = (
-        <Button onClick={this.changeListView} style={{ marginTop: '20px' }} variant="contained" color="primary" disabled>
+        <Button onClick={this.props.toggleListView} variant="contained" color="primary" disabled>
           Submit
         </Button>
       );
     }
 
-    if (this.state.listView) {
-      formOrListView = <ListView {...this.state} changeListView={this.changeListView} />;
+    if (this.props.listView) {
+      formOrListView = <ListView {...this.state} changeListView={this.props.toggleListView} />;
     } else {
       formOrListView = (
         <div>
@@ -89,28 +99,23 @@ class FormView extends React.Component {
               className="formContainer"
               noValidate
               autoComplete="off"
+              style={{ display: 'flex', flexDirection: 'column'}}
             >
+            <div style={{display: 'flex', padding: '0', margin: '0', justifyContent: 'center'}}>
+              <Button onClick={this.useCurrentLocation} variant="contained" color="primary">
+                <LocationIcon />
+              </Button>
               <TextField
                 id="filled-location"
                 label="Location"
                 className="textField"
                 value={this.state.location}
                 onChange={this.changeLocation}
-                // margin="normal"
+                onKeyDown={this.handleEnter}
                 variant="filled"
-              />
-              <Button onClick={this.useCurrentLocation} style={{ margin: '20px 0' }} variant="contained" color="primary">
-                Use Current Location
-              </Button>
-              <TextField
-                id="filled-category"
-                label="Feed me this..."
-                className="textField"
-                value={this.state.food}
-                onChange={this.changeCategory}
-                // margin="normal"
-                variant="filled"
-              />
+              />              
+            </div>
+              <p style={{fontSize: 12, color: 'grey'}}>Example: 278 Post St, San Francisco, CA 94108</p>
               <br />
               {submitButton}
             </form>

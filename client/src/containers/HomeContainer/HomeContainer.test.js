@@ -12,10 +12,6 @@ describe('HomeContainer', () => {
   it('should have a div with a className homeContainer', () => {
     expect(wrapper.find('.homeContainer')).to.have.lengthOf(1);
   });
-  it('should have a list state', () => {
-    wrapper.setState({ list: 1 });
-    expect('list' in wrapper.state()).to.equal(true);
-  });
   it('should have a ListView component', () => {
     expect(wrapper.children).to.have.lengthOf(1);
   });

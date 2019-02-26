@@ -15,18 +15,17 @@ class ListView extends React.Component {
   }
 
   componentWillMount() {
-    if(this.props.location === 'Current Location') {
-      const { latitude, longitude } = this.props;
-      const data = {
-        latitude,
-        longitude,
-      };
-      axios.post('https://v0nnu8eif4.execute-api.us-west-2.amazonaws.com/dev/sfFoodTrucks', data).then((resp) => {
-        this.setState({ truckList: resp.data.message, isFetching: false });
-      }).catch((err) => {
-        console.error(err, ' Failed to fetch resource');
-      });
-    }
+    const { latitude, longitude, location } = this.props;
+    const data = {
+      latitude,
+      longitude,
+      location,
+    };
+    axios.post('https://v0nnu8eif4.execute-api.us-west-2.amazonaws.com/dev/sfFoodTrucks', data).then((resp) => {
+      this.setState({ truckList: resp.data.message, isFetching: false });
+    }).catch((err) => {
+      console.error(err, ' Failed to fetch resource');
+    });
   }
 
   render() {
@@ -49,7 +48,7 @@ class ListView extends React.Component {
     }
     const truckList = this.state.truckList.length > 0 ? this.state.truckList.map((truck) => {
       return (
-        <ListItem id={truck.applicant} truck={truck} />
+        <ListItem key={`${truck.address},${truck.applicant}`} truck={truck} />
       );
     }) : null;
 

@@ -1,20 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
 import red from '@material-ui/core/colors/red';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
+import NavigationIcon from '@material-ui/icons/Navigation';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const styles = theme => ({
   card: {
@@ -47,8 +43,43 @@ class ListItem extends React.Component {
     super(props);
     this.state = {
       expanded: false,
-    }
+    };
     this.handleExpandClick = this.handleExpandClick.bind(this);
+    this.mapClick = this.mapClick.bind(this);
+    this.uberPressed = this.uberPressed.bind(this);
+  }
+
+  mapClick() {
+    const { address, latitude, longitude } = this.props.truck;
+    let baseURL;
+    let address1;
+    let address2;
+    if (address.length > 0) {
+      baseURL = 'http://maps.google.com/maps?q=';
+      address1 = address;
+      address2 = 'San Francisco';
+    } else {
+      baseURL = 'http://maps.google.com/maps?q=';
+      address1 = latitude;
+      address2 = longitude;
+    }
+    const url = `${baseURL}${address1},${address2}`;
+    try {
+      window.open(encodeURI(url));
+    } catch (err) {
+      console.error(err, `Could not open ${url}`);
+    }
+  }
+
+  uberPressed() {
+    const { applicant, address, latitude, longitude } = this.props.truck;
+    const baseURL = 'https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff';
+    const url = `${baseURL}[latitude]=${latitude}&dropoff[longitude]=${longitude}&dropoff[nickname]=${applicant}`;
+    try {
+      window.open(encodeURI(url));
+    } catch (err) {
+      console.error(err, ' Failed to open url to Uber');
+    }
   }
 
   handleExpandClick() {
@@ -56,7 +87,7 @@ class ListItem extends React.Component {
   }
 
   render() {
-    const { applicant, fooditems, dayshours } = this.props.truck;
+    const { applicant, fooditems, dayshours, distance } = this.props.truck;
 
     return (
       <Card>
@@ -64,60 +95,28 @@ class ListItem extends React.Component {
           title={applicant}
           subheader={dayshours}
         />
-        <CardMedia
-          // image="/static/images/cards/paella.jpg"
-          title="Paella dish"
-        />
         <CardContent>
           <Typography component="p">
             {fooditems}
           </Typography>
         </CardContent>
+        <CardContent>
+          <Typography component="p">
+            {`${distance} Miles`}
+          </Typography>
+        </CardContent>
         <CardActions disableActionSpacing>
-          <IconButton aria-label="Add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label="Share">
-            <ShareIcon />
-          </IconButton>
-          <IconButton
-            // className={classnames(classes.expand, {
-            //   [classes.expandOpen]: this.state.expanded,
-            // })}
-            onClick={this.handleExpandClick}
-            aria-expanded={this.state.expanded}
-            aria-label="Show more"
-          >
-            <ExpandMoreIcon />
-          </IconButton>
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'space-around', alignItems: 'center', marginBottom: '15px' }}>
+            <Fab onClick={this.mapClick} variant="extended" aria-label="Delete">
+              <NavigationIcon />
+              Maps
+            </Fab>
+            <Fab onClick={this.uberPressed} variant="extended" aria-label="Delete">
+              <NavigationIcon />
+              Uber
+            </Fab>
+          </div>
         </CardActions>
-        <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <Typography paragraph>Method:</Typography>
-            <Typography paragraph>
-              Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
-              minutes.
-            </Typography>
-            <Typography paragraph>
-              Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high
-              heat. Add chicken, shrimp and chorizo, and cook, stirring occasionally until lightly
-              browned, 6 to 8 minutes. Transfer shrimp to a large plate and set aside, leaving
-              chicken and chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes, onion,
-              salt and pepper, and cook, stirring often until thickened and fragrant, about 10
-              minutes. Add saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
-            </Typography>
-            <Typography paragraph>
-              Add rice and stir very gently to distribute. Top with artichokes and peppers, and cook
-              without stirring, until most of the liquid is absorbed, 15 to 18 minutes. Reduce heat
-              to medium-low, add reserved shrimp and mussels, tucking them down into the rice, and
-              cook again without stirring, until mussels have opened and rice is just tender, 5 to 7
-              minutes more. (Discard any mussels that don’t open.)
-            </Typography>
-            <Typography>
-              Set aside off of the heat to let rest for 10 minutes, and then serve.
-            </Typography>
-          </CardContent>
-        </Collapse>
       </Card>
     );
   }
