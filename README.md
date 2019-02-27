@@ -9,7 +9,14 @@ A simple full stack web application to fetch a list of food trucks local to SF
     1. [Installing Dependencies](#installing-dependencies)
     1. [Serving in Development](#serving-in-development)
     1. [Testing](#testing)
+    1. [Style Guide](#style-guide)
+1. [Features](#features)
+1. [Architecture](#architecture)
+1. [Given More Time](#given-more-time)
+1. [AWS Lambda Function](#aws-lambda-function)
 1. [Roadmap](#roadmap)
+1. [Deployed Staging Link](#deployed-staging-link)
+1. [Portfolio](#portfolio)
 
 ## Usage
 
@@ -103,7 +110,7 @@ I have not yet had time to impliment integration tests for the AWS Lambda servic
 - As a user I want to filter results by food type so that I can quickly find the type of food truck I would like to eat at. 
 - As a user I want to see more details about the food truck on Yelp so that I can see how other people liked it.
 
-### Staging Deployed Link
+### Deployed Staging Link
 
 [Staging](http://walktosffoodtrucks.us-west-2.elasticbeanstalk.com)
 
