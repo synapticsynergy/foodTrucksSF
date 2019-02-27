@@ -31,6 +31,9 @@ const styles = {
     fontSize: 12,
     color: 'grey',
   },
+  formInput: {
+    flexGrow: 1,
+  },
 };
 
 class FormView extends React.Component {
@@ -140,7 +143,7 @@ class FormView extends React.Component {
                   onChange={this.changeLocation}
                   onKeyDown={this.handleEnter}
                   variant="filled"
-                  style={{flexGrow:1}}
+                  style={styles.formInput}
                 />
               </div>
               <p style={styles.p}>Example: 278 Post St, San Francisco, CA 94108</p>
