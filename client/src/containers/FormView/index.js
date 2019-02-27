@@ -24,6 +24,9 @@ const styles = {
     margin: '0',
     justifyContent: 'center',
   },
+  titleP: {
+    marginTop: 0,
+  },
   p: {
     fontSize: 12,
     color: 'grey',
@@ -117,27 +120,29 @@ class FormView extends React.Component {
       formOrListView = (
         <div>
           <div style={styles.formView}>
-            <h2>Great Food is Waiting</h2>
+            <h2>Food Trucks Within Walking Distance</h2>
+            <p style={styles.titleP}>San Francisco Edition</p>
             <form
               className="formContainer"
               noValidate
               autoComplete="off"
               style={styles.formContainer}
             >
-            <div style={styles.formGroup}>
-              <Button onClick={this.useCurrentLocation} variant="contained" color="primary">
-                <LocationIcon />
-              </Button>
-              <TextField
-                id="filled-location"
-                label="Location"
-                className="textField"
-                value={location}
-                onChange={this.changeLocation}
-                onKeyDown={this.handleEnter}
-                variant="filled"
-              />
-            </div>
+              <div style={styles.formGroup}>
+                {/* <Button onClick={this.useCurrentLocation} variant="contained" color="primary">
+                  <LocationIcon />
+                </Button> */}
+                <TextField
+                  id="filled-location"
+                  label="Location"
+                  className="textField"
+                  value={location}
+                  onChange={this.changeLocation}
+                  onKeyDown={this.handleEnter}
+                  variant="filled"
+                  style={{flexGrow:1}}
+                />
+              </div>
               <p style={styles.p}>Example: 278 Post St, San Francisco, CA 94108</p>
               <br />
               {submitButton}

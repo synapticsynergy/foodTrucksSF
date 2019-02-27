@@ -44,6 +44,7 @@ class ListView extends React.Component {
       this.setState({ truckList: resp.data.message, isFetching: false });
     }).catch((err) => {
       console.error(err, ' Failed to fetch resource');
+      this.setState({ isFetching: false });
     });
   }
 
