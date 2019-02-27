@@ -17,7 +17,8 @@ class App extends React.Component {
   }
 
   toggleListView() {
-    this.setState({ listView: !this.state.listView });
+    const { listView } = this.state;
+    this.setState({ listView: !listView });
   }
 
   backToFormView() {
