@@ -1,13 +1,34 @@
 import React from 'react';
 import {
   TextField,
-  Typography,
   Button,
-  FormHelperText,
-  LinearProgress,
 } from '@material-ui/core';
 import LocationIcon from '@material-ui/icons/LocationSearching';
 import ListView from '../ListView';
+
+const styles = {
+  formContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  formView: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '80vh',
+  },
+  formGroup: {
+    display: 'flex',
+    padding: '0',
+    margin: '0',
+    justifyContent: 'center',
+  },
+  p: {
+    fontSize: 12,
+    color: 'grey',
+  },
+};
 
 class FormView extends React.Component {
   constructor(props) {
@@ -34,7 +55,12 @@ class FormView extends React.Component {
   updateCurrentLocation(location) {
     const { coords } = location;
     const { latitude, longitude } = coords;
-    this.setState({ location: 'Current Location', latitude, longitude, isFetching: false });
+    this.setState({
+      location: 'Current Location',
+      latitude,
+      longitude,
+      isFetching: false,
+    });
   }
 
   useCurrentLocation() {
@@ -58,43 +84,47 @@ class FormView extends React.Component {
   }
 
   handleEnter(e) {
-    //This is the keyCode for the enter key
+    const { toggleListView } = this.props;
+    // This is the keyCode for the enter key
     if (e.keyCode === 13) {
-      this.props.toggleListView();
+      toggleListView();
     }
   }
 
   render() {
     let submitButton;
     let formOrListView;
-    if(this.state.location) {
+    const { location } = this.state;
+    const { toggleListView, listView } = this.props;
+
+    if (location) {
       submitButton = (
-        <Button onClick={this.props.toggleListView} variant="contained" color="primary">
+        <Button onClick={toggleListView} variant="contained" color="primary">
           Submit
         </Button>
       );
     } else {
       submitButton = (
-        <Button onClick={this.props.toggleListView} variant="contained" color="primary" disabled>
+        <Button onClick={toggleListView} variant="contained" color="primary" disabled>
           Submit
         </Button>
       );
     }
 
-    if (this.props.listView) {
-      formOrListView = <ListView {...this.state} changeListView={this.props.toggleListView} />;
+    if (listView) {
+      formOrListView = <ListView {...this.state} changeListView={toggleListView} />;
     } else {
       formOrListView = (
         <div>
-          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
+          <div style={styles.formView}>
             <h2>Great Food is Waiting</h2>
             <form
               className="formContainer"
               noValidate
               autoComplete="off"
-              style={{ display: 'flex', flexDirection: 'column'}}
+              style={styles.formContainer}
             >
-            <div style={{display: 'flex', padding: '0', margin: '0', justifyContent: 'center'}}>
+            <div style={styles.formGroup}>
               <Button onClick={this.useCurrentLocation} variant="contained" color="primary">
                 <LocationIcon />
               </Button>
@@ -102,13 +132,13 @@ class FormView extends React.Component {
                 id="filled-location"
                 label="Location"
                 className="textField"
-                value={this.state.location}
+                value={location}
                 onChange={this.changeLocation}
                 onKeyDown={this.handleEnter}
                 variant="filled"
               />
             </div>
-              <p style={{ fontSize: 12, color: 'grey' }}>Example: 278 Post St, San Francisco, CA 94108</p>
+              <p style={styles.p}>Example: 278 Post St, San Francisco, CA 94108</p>
               <br />
               {submitButton}
             </form>

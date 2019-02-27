@@ -5,6 +5,25 @@ import {
 } from '@material-ui/core';
 import ListItem from './ListItem';
 
+const styles = {
+  progress: {
+    height: '80vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  noResults: {
+    height: '80hv',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+  },
+  tryAgain: {
+    margin: '20px 0',
+  },
+};
+
 class ListView extends React.Component {
   constructor(props) {
     super(props);
@@ -29,24 +48,27 @@ class ListView extends React.Component {
   }
 
   render() {
-    if(this.state.isFetching) {
+    const { isFetching, truckList } = this.state;
+    const { changeListView } = this.props;
+
+    if (isFetching) {
       return (
-        <div style={{ height: '80vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div style={styles.progress}>
           <CircularProgress />
         </div>
       );
     }
-    if(!this.state.isFetching && this.state.truckList.length === 0) {
+    if (!isFetching && truckList.length === 0) {
       return (
-        <div style={{ height: '80hv', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+        <div style={styles.noResults}>
           <h1>No Results Within Walking Distance.</h1>
           <div>
-            <Button onClick={this.props.changeListView} style={{ margin: '20px 0' }} variant="contained" color="primary">Try Again</Button>
+            <Button onClick={changeListView} style={styles.tryAgain} variant="contained" color="primary">Try Again</Button>
           </div>
         </div>
-      )
+      );
     }
-    const truckList = this.state.truckList.length > 0 ? this.state.truckList.map((truck) => {
+    const truckListComponent = truckList.length > 0 ? truckList.map((truck) => {
       return (
         <ListItem key={`${truck.address},${truck.applicant}`} truck={truck} />
       );
@@ -54,7 +76,7 @@ class ListView extends React.Component {
 
     return (
       <div>
-        {truckList}
+        {truckListComponent}
       </div>
     );
   }

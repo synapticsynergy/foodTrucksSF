@@ -4,7 +4,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import './App.css';
-import HomeContainer from './containers/HomeContainer';
+import FormView from './containers/FormView';
 
 class App extends React.Component {
   constructor(props) {
@@ -40,7 +40,7 @@ class App extends React.Component {
             Just Truck It.
           </Typography>
         </AppBar>
-        <HomeContainer toggleListView={this.toggleListView} {...this.state} />
+        <FormView toggleListView={this.toggleListView} {...this.state} />
       </div>
     );
   }
