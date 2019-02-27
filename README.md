@@ -68,6 +68,7 @@ The features of this app are very simple:
 1. All results are sorted by distance.
 1. All results have a universal deep link to locate the food truck on google maps. 
 1. All results also have a universal deep link to call an uber driver and auto populate the destination.
+1. This web app is mobile responsive. 
 
 ### Architecture
 
